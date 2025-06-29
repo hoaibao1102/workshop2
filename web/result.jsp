@@ -70,10 +70,8 @@
             <p>Correct Answers: ${correct}</p>
             <p><strong>Your Score: ${score}</strong></p>
 
-            <form action="MainController" method="post">
-                <input type="hidden" name="action" value="dashboard"/>
-                <button type="submit">← Back to Dashboard</button>
-            </form>
+            <a href="MainController?action=dashboard" class="back-link">← Back to Dashboard</a>
+
         </div>
 
     </body>
