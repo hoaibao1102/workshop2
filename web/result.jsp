@@ -59,6 +59,22 @@
             button:hover {
                 background: linear-gradient(to right, #0056b3, #003c7c);
             }
+            .btn-back {
+                display: inline-block;
+                background: linear-gradient(to right, #007bff, #0056b3);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 6px;
+                font-size: 16px;
+                text-decoration: none;
+                margin-top: 30px;
+                transition: background 0.3s ease;
+            }
+
+            .btn-back:hover {
+                background: linear-gradient(to right, #0056b3, #003c7c);
+            }
+
         </style>
     </head>
     <body>
@@ -67,10 +83,10 @@
             <h2>Exam Result</h2>
 
             <p>Total Questions: ${total}</p>
-            <p>Correct Answers: ${correct}</p>
+            <p>Correct Answers: ${correctNum}</p>
             <p><strong>Your Score: ${score}</strong></p>
 
-            <a href="MainController?action=dashboard" class="back-link">← Back to Dashboard</a>
+            <a href="MainController?action=dashboard" class="btn-back">← Back to Dashboard</a>
 
         </div>
 

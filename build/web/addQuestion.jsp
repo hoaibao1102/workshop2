@@ -113,11 +113,12 @@
 
             <form action="MainController" method="post">
                 <input type="hidden" name="action" value="addQuestion"/>
+                <input type="hidden" name="categoryId" value="${cateId}"/>
                 <input type="hidden" name="examId" value="${examId}"/>
                 <input type="hidden" name="examTitle" value="${examTitle}"/>
 
                 <label>Question:</label>
-                <textarea name="questionText" rows="3">${questionText}</textarea>
+                <textarea name="questionText" rows="3" required>${questionText}</textarea>
                 <c:if test="${not empty errorQuestion}">
                     <div class="error-message">${errorQuestion}</div>
                 </c:if>

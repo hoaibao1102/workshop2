@@ -94,6 +94,41 @@
             button:hover {
                 background: linear-gradient(to right, #0056b3, #003c7c);
             }
+            .filter-bar {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                margin-bottom: 20px;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .filter-bar label {
+                font-weight: 500;
+                color: #333;
+            }
+
+            .filter-bar select {
+                padding: 8px 12px;
+                border-radius: 6px;
+                border: 1px solid #ccc;
+                min-width: 150px;
+            }
+
+            .filter-bar button {
+                padding: 8px 14px;
+                border: none;
+                border-radius: 6px;
+                background: linear-gradient(to right, #007bff, #0056b3);
+                color: white;
+                cursor: pointer;
+                transition: background 0.3s;
+            }
+
+            .filter-bar button:hover {
+                background: linear-gradient(to right, #0056b3, #003c7c);
+            }
+
         </style>
     </head>
     <body>
@@ -103,6 +138,25 @@
 
             <h2>Available Exams</h2>
 
+
+            <c:if test="${sessionScope.user.role eq 'Student'}">
+                <form method="get" action="MainController" class="filter-bar">
+                    <input type="hidden" name="action" value="filterSubject"/>
+                    <input type="hidden" name="categoryId" value="${categoryId}"/>
+
+                    <label for="subject">Filter by Subject:</label>
+                    <select name="subject" id="subject">
+                        <option value="">-- Select Subjects --</option>
+                        <c:forEach var="s" items="${subjectFilter}">
+                            <option value="${s}" ${s == selectedSubject ? "selected" : ""}>${s}</option>
+                        </c:forEach>
+                    </select>
+
+                    <button type="submit">Filter</button>
+                </form>
+            </c:if>
+
+
             <table>
                 <tr>
                     <th>Exam Title</th>
@@ -111,8 +165,29 @@
                     <th>Duration</th>
                     <th>Action</th>
                 </tr>
+                <c:if test="${not empty examListSubject}">
+                    <c:forEach var="exam" items="${examListSubject}">
+                        <tr>                     
+                            <td>${exam.examTitle}</td>
+                            <td>${exam.subject}</td>                       
+                            <td>${exam.totalMarks}</td>
+                            <td>${exam.duration}</td>
+                            <td>
+                                <form action="MainController" method="post">
+                                    <input type="hidden" name="action" value="${user.role eq 'Instructor' ? 'goToAddQuestion' : 'takeExam'}"/>
+                                    <input type="hidden" name="examTitle" value="${exam.examTitle}"/>
+                                    <input type="hidden" name="examId" value="${exam.examId}"/>
+                                    <input type="hidden" name="cateId" value="${exam.categoryId}"/>
+                                    <button type="submit">
+                                        ${user.role eq 'Instructor' ? 'Add Question' : 'Take Exam'}
+                                    </button>
+                                </form>    
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </c:if>
 
-                <c:if test="${not empty examList}">
+                <c:if test="${not empty examList and empty examListSubject}">
                     <c:forEach var="exam" items="${examList}">
                         <tr>                     
                             <td>${exam.examTitle}</td>

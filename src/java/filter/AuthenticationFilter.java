@@ -24,7 +24,8 @@ import util.AuthUtils;
  * @author MSI PC
  */
 @WebFilter(filterName = "AuthenticationFilter", urlPatterns = {
-    "/Dashboard.jsp"
+    "/Dashboard.jsp","/viewExams.jsp","/takeExam.jsp",
+    "/result.jsp",
 })
 public class AuthenticationFilter implements Filter {
 

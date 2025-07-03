@@ -115,14 +115,12 @@
 
         <table>
             <tr>
-                <th>ID</th>
                 <th>Category Name</th>
                 <th>Description</th>
             </tr>
             <c:if test="${not empty listExamCategory}">
                 <c:forEach var="cate" items="${listExamCategory}">
                     <tr>
-                        <td>${cate.categoryId}</td>
                         <td>
                             <a href="MainController?action=viewExamsByCategory&categoryId=${cate.categoryId}">
                                 ${cate.categoryName}

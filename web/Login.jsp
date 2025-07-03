@@ -82,6 +82,11 @@
                 text-align: center;
                 font-size: 14px;
             }
+            .error-message::before {
+                content: "⚠ ";
+                font-weight: bold;
+                margin-right: 5px;
+            }
         </style>
     </head>
     <body>
@@ -100,18 +105,20 @@
                 <input type="submit" value="Login" />
             </form>
 
-            <div class="error-message">
-                <c:if test="${not empty errorNoti}">
-                    ${errorNoti}
-                </c:if>
-                <c:if test="${not empty errorMessage}">
-                    ${errorMessage}
-                </c:if>
-                <c:if test="${not empty sessionScope.errorLogin}">
-                    ${sessionScope.errorLogin}
-                    <c:remove var="errorLogin" scope="session" />
-                </c:if>
-            </div>
+            <c:if test="${not empty errorNoti or not empty errorMessage or not empty sessionScope.errorLogin}">
+                <div class="error-message">
+                    <c:if test="${not empty errorNoti}">
+                        ${errorNoti}
+                    </c:if>
+                    <c:if test="${not empty errorMessage}">
+                        ${errorMessage}
+                    </c:if>
+                    <c:if test="${not empty sessionScope.errorLogin}">
+                        ${sessionScope.errorLogin}
+                        <c:remove var="errorLogin" scope="session" />
+                    </c:if>
+                </div>
+            </c:if>
         </div>
 
     </body>

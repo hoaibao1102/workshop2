@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class DBConnection implements Serializable {
 
-    private static final String DB_NAME = "Workshop2";
+    private static final String DB_NAME = "WorkShop2";
     private static final String DB_USERNAME = "sa";
     private static final String DB_PASSWORD = "12345";
 

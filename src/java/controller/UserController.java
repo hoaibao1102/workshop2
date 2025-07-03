@@ -114,4 +114,8 @@ public class UserController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private String handleSubmitExam(HttpServletRequest request, HttpServletResponse response) {
+        String url ="";
+        return url;
+    }
 }

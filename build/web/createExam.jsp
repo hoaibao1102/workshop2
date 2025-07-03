@@ -85,12 +85,29 @@
                 color: #d8000c;
                 margin-top: 20px;
             }
+
+            .btn-back {
+                display: inline-block;
+                background: linear-gradient(to right, #007bff, #0056b3);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 6px;
+                font-size: 15px;
+                text-decoration: none;
+                margin-bottom: 20px;
+                transition: background 0.3s ease;
+            }
+
+            .btn-back:hover {
+                background: linear-gradient(to right, #0056b3, #003c7c);
+            }
+
         </style>
     </head>
     <body>
 
         <div class="container">
-            <button onclick="history.back()">← Back</button>
+            <a href="MainController?action=dashboard" class="btn-back">← Back to Dashboard</a>
             <h2>Create New Exam</h2>
 
             <form action="MainController" method="post">
@@ -111,9 +128,9 @@
                 <label for="categoryId">Category:</label>
                 <select name="categoryId">
                     <option value="">-- Select --</option>
-                    <option value="100" ${errorExam.categoryId == '100' ? 'selected' : ''}>Quiz</option>
-                    <option value="101" ${errorExam.categoryId == '101' ? 'selected' : ''}>Midterm</option>
-                    <option value="102" ${errorExam.categoryId == '102' ? 'selected' : ''}>Final</option>
+                    <option value="1" ${errorExam.categoryId == '1' ? 'selected' : ''}>Quiz</option>
+                    <option value="2" ${errorExam.categoryId == '2' ? 'selected' : ''}>Midterm</option>
+                    <option value="3" ${errorExam.categoryId == '3' ? 'selected' : ''}>Final</option>
                 </select>
                 <c:if test="${not empty errorCategory}">
                     <div class="error-message">${errorCategory}</div>

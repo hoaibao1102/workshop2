@@ -27,6 +27,21 @@ public class MainController extends HttpServlet {
     private static final String USER_CONTROLLER = "UserController";
     private static final String EXAM_CONTROLLER = "ExamController";
 
+    private boolean isUserAction(String action) {
+        return "login".equals(action)
+                || "logout".equals(action);
+    }
+
+    private boolean isExamAction(String action) {
+        return "viewExamsByCategory".equals(action)
+                || "createExam".equals(action)
+                || "goToAddQuestion".equals(action)
+                || "addQuestion".equals(action)
+                || "takeExam".equals(action)
+                || "submitExam".equals(action)
+                || "filterSubject".equals(action);
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,23 +61,11 @@ public class MainController extends HttpServlet {
 
             if (action == null) {
                 url = LOGIN_PAGE;
-            } else if (action.equals("login")) {
+            } else if (isExamAction(action)) {
+                url = EXAM_CONTROLLER;
+            }else if (isUserAction(action)) {
                 url = USER_CONTROLLER;
-            } else if (action.equals("logout")) {
-                url = USER_CONTROLLER;
-            } else if (action.equals("viewExamsByCategory")) {
-                url = EXAM_CONTROLLER;
-            } else if (action.equals("createExam")) {
-                url = EXAM_CONTROLLER;
-            } else if (action.equals("goToAddQuestion")) {
-                url = EXAM_CONTROLLER;
-            } else if (action.equals("addQuestion")) {
-                url = EXAM_CONTROLLER;
-            } else if (action.equals("takeExam")) {
-                url = EXAM_CONTROLLER;
-            } else if (action.equals("submitExam")) {
-                url = EXAM_CONTROLLER;
-            } else if (action.equals("dashboard")) {
+            }else if (action.equals("dashboard")) {
                 HttpSession session = request.getSession(false);
                 if (session != null) {
                     url = "Dashboard.jsp";

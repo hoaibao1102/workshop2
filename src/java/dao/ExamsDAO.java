@@ -64,7 +64,7 @@ public class ExamsDAO {
             ps.setInt(5, ex.getDuration());
 
             int rowEffect = ps.executeUpdate();
-            return rowEffect > 0 ;
+            return rowEffect > 0;
         } catch (ClassNotFoundException ex1) {
             Logger.getLogger(ExamsDAO.class.getName()).log(Level.SEVERE, null, ex1);
         } catch (SQLException ex1) {
@@ -72,6 +72,60 @@ public class ExamsDAO {
         }
 
         return false;
+    }
+
+    public List<Exams> getExamsBySubject(String subject, String categoryId) {
+        String sql = "SELECT * FROM tblExams WHERE category_id = ? and subject = ? ";
+        List<Exams> exList = new ArrayList<>();
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, categoryId);
+            ps.setString(2, subject);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Exams ex = new Exams(rs.getInt("exam_id"),
+                        rs.getString("exam_title"),
+                        rs.getString("Subject"),
+                        rs.getInt("category_id"),
+                        rs.getInt("total_marks"),
+                        rs.getInt("Duration"));
+                exList.add(ex);
+            }
+            return exList;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ExamsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+    public List<String> getSubject(String categoryId) {
+        String sql = " SELECT  distinct subject FROM tblExams WHERE category_id = ?";
+        List<String> exList = new ArrayList<>();
+
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, categoryId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                exList.add(rs.getString("subject"));
+            }
+            return exList;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ExamsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+
     }
 
 }
